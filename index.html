@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naukri - Find Your Dream Job</title>
+
+    <style>
+        /* GENERAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #30343b;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #275df5;
+        }
+
+        .logo span {
+            color: #ff7555;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #333;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #275df5;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: 1px solid #275df5;
+            background-color: white;
+            color: #275df5;
+            border-radius: 6px;
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #275df5;
+            color: white;
+            border-radius: 6px;
+        }
+
+        /* HOME SECTION */
+        .hero {
+            background-color: #eaf0ff;
+            text-align: center;
+            padding: 85px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            color: #202b46;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .search-box {
+            max-width: 1050px;
+            margin: auto;
+            padding: 15px;
+            background-color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .search-box input,
+        .search-box select {
+            flex: 1;
+            min-width: 0;
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            background-color: #275df5;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        /* COMMON SECTION STYLES */
+        section {
+            scroll-margin-top: 85px;
+        }
+
+        .section {
+            padding: 65px 8%;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #202b46;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 35px;
+        }
+
+        /* CATEGORY SECTION */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .category-card {
+            background-color: white;
+            padding: 28px;
+            border: 1px solid #e5e8ef;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+
+        .category-card p {
+            color: #275df5;
+            font-size: 14px;
+        }
+
+        /* JOB SECTION */
+        .jobs-section {
+            background-color: #edf1f8;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .job-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e8ef;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .job-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .job-top h3 {
+            color: #202b46;
+            font-size: 19px;
+        }
+
+        .company-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eaf0ff;
+            color: #275df5;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .company-name {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 13px;
+            margin-bottom: 18px;
+            color: #555;
+        }
+
+        .job-description {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 18px;
+        }
+
+        .job-footer span {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .job-footer button {
+            background-color: #275df5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* COMPANIES SECTION */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            background-color: white;
+            padding: 30px 15px;
+            text-align: center;
+            border: 1px solid #e5e8ef;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .company-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+
+        .company-card h3 {
+            color: #275df5;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .company-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* SERVICES SECTION */
+        .services-section {
+            background-color: #edf1f8;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .about-content h3 {
+            color: #202b46;
+            margin: 25px 0 12px;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .about-content ul {
+            padding-left: 25px;
+            color: #666;
+            line-height: 2;
+        }
+
+        .contact-box {
+            background-color: #eaf0ff;
+            padding: 30px;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 20px;
+            color: #202b46;
+        }
+
+        .contact-box p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: #202b46;
+            color: white;
+            padding: 45px 8% 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 35px;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-content p,
+        .footer-content a {
+            color: #c7cbd4;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .copyright {
+            border-top: 1px solid #48516a;
+            padding-top: 20px;
+            text-align: center;
+            color: #c7cbd4;
+            font-size: 13px;
+        }
+
+        /* TABLET RESPONSIVE */
+        @media screen and (max-width: 768px) {
+
+            .navbar {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box input,
+            .search-box select,
+            .search-box button {
+                width: 100%;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media screen and (max-width: 480px) {
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero {
+                padding: 55px 15px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .section {
+                padding: 45px 5%;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .job-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">naukri<span>.com</span></div>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#jobs">Jobs</a>
+            <a href="#companies">Companies</a>
+            <a href="#services">Services</a>
+            <a href="#about">About Us</a>
+        </nav>
+
+        <div class="nav-buttons">
+            <button class="login-btn">Login</button>
+            <button class="register-btn">Register</button>
+        </div>
+
+    </header>
+
+
+    <!-- PAGE 1: HOME -->
+    <section class="hero" id="home">
+
+        <h1>Find Your Dream Job Now</h1>
+
+        <p>5 lakh+ jobs for you to explore</p>
+
+        <div class="search-box">
+
+            <input type="text"
+            placeholder="Enter skills / designations / companies">
+
+            <select>
+                <option>Select experience</option>
+                <option>Fresher</option>
+                <option>1 Year</option>
+                <option>2 Years</option>
+                <option>3 Years</option>
+            </select>
+
+            <input type="text" placeholder="Enter location">
+
+            <button>Search</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- POPULAR CATEGORIES -->
+    <section class="section">
+
+        <h2>Popular Job Categories</h2>
+
+        <p class="subtitle">
+            Explore jobs based on your interests
+        </p>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>IT & Software</h3>
+                <p>Explore software jobs →</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📊</div>
+                <h3>Data Science</h3>
+                <p>Explore data jobs →</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📱</div>
+                <h3>Mobile Development</h3>
+                <p>Explore app jobs →</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🎨</div>
+                <h3>Design</h3>
+                <p>Explore design jobs →</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📈</div>
+                <h3>Marketing</h3>
+                <p>Explore marketing jobs →</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💼</div>
+                <h3>Sales</h3>
+                <p>Explore sales jobs →</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAGE 2: JOBS -->
+    <section class="section jobs-section" id="jobs">
+
+        <h2>Recommended Jobs For You</h2>
+
+        <p class="subtitle">
+            Latest opportunities from top companies
+        </p>
+
+        <div class="jobs-grid">
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>Python Developer</h3>
+                    <span class="company-icon">T</span>
+                </div>
+
+                <p class="company-name">Tech Solutions Pvt Ltd</p>
+
+                <div class="job-details">
+                    <span>💰 3-5 LPA</span>
+                    <span>📍 Hyderabad</span>
+                    <span>⏳ Fresher</span>
+                </div>
+
+                <p class="job-description">
+                    Looking for Python developers with basic
+                    programming knowledge.
+                </p>
+
+                <div class="job-footer">
+                    <span>2 days ago</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>Frontend Developer</h3>
+                    <span class="company-icon">W</span>
+                </div>
+
+                <p class="company-name">Web Technologies</p>
+
+                <div class="job-details">
+                    <span>💰 3-6 LPA</span>
+                    <span>📍 Bangalore</span>
+                    <span>⏳ 0-1 Years</span>
+                </div>
+
+                <p class="job-description">
+                    Knowledge of HTML, CSS and JavaScript is required.
+                </p>
+
+                <div class="job-footer">
+                    <span>1 day ago</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>Software Engineer</h3>
+                    <span class="company-icon">I</span>
+                </div>
+
+                <p class="company-name">Innovative Systems</p>
+
+                <div class="job-details">
+                    <span>💰 4-7 LPA</span>
+                    <span>📍 Chennai</span>
+                    <span>⏳ Fresher</span>
+                </div>
+
+                <p class="job-description">
+                    Fresh graduates with programming fundamentals
+                    can apply.
+                </p>
+
+                <div class="job-footer">
+                    <span>3 days ago</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>Python Full Stack Developer</h3>
+                    <span class="company-icon">D</span>
+                </div>
+
+                <p class="company-name">Digital Careers</p>
+
+                <div class="job-details">
+                    <span>💰 3-5 LPA</span>
+                    <span>📍 Hyderabad</span>
+                    <span>⏳ Fresher</span>
+                </div>
+
+                <p class="job-description">
+                    Knowledge of Python, HTML, CSS and databases.
+                </p>
+
+                <div class="job-footer">
+                    <span>Today</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>Java Developer</h3>
+                    <span class="company-icon">J</span>
+                </div>
+
+                <p class="company-name">Global Technologies</p>
+
+                <div class="job-details">
+                    <span>💰 4-6 LPA</span>
+                    <span>📍 Pune</span>
+                    <span>⏳ Fresher</span>
+                </div>
+
+                <p class="job-description">
+                    Basic knowledge of Java and object-oriented
+                    programming.
+                </p>
+
+                <div class="job-footer">
+                    <span>Today</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <h3>UI/UX Designer</h3>
+                    <span class="company-icon">U</span>
+                </div>
+
+                <p class="company-name">Creative Solutions</p>
+
+                <div class="job-details">
+                    <span>💰 3-5 LPA</span>
+                    <span>📍 Mumbai</span>
+                    <span>⏳ 0-1 Years</span>
+                </div>
+
+                <p class="job-description">
+                    Knowledge of UI design and prototyping tools.
+                </p>
+
+                <div class="job-footer">
+                    <span>Yesterday</span>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAGE 3: COMPANIES -->
+    <section class="section" id="companies">
+
+        <h2>Top Companies Hiring Now</h2>
+
+        <p class="subtitle">
+            Explore opportunities from leading companies
+        </p>
+
+        <div class="company-grid">
+
+            <div class="company-card">
+                <h3>TCS</h3>
+                <p>IT Services and Consulting</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Infosys</h3>
+                <p>Information Technology</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Wipro</h3>
+                <p>IT and Business Services</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Accenture</h3>
+                <p>Technology and Consulting</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Microsoft</h3>
+                <p>Software and Cloud</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Amazon</h3>
+                <p>E-commerce and Technology</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Google</h3>
+                <p>Technology and Innovation</p>
+            </div>
+
+            <div class="company-card">
+                <h3>Capgemini</h3>
+                <p>IT and Consulting</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAGE 4: SERVICES -->
+    <section class="section services-section" id="services">
+
+        <h2>Career Services</h2>
+
+        <p class="subtitle">
+            Get the support you need to grow professionally
+        </p>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <div class="category-icon">📄</div>
+                <h3>Resume Writing</h3>
+                <p>Create a professional resume that highlights
+                    your skills and experience.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🎯</div>
+                <h3>Interview Preparation</h3>
+                <p>Improve your confidence and interview performance.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>Online Learning</h3>
+                <p>Develop technical skills and improve your knowledge.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🚀</div>
+                <h3>Career Guidance</h3>
+                <p>Get guidance to choose the right career path.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🔍</div>
+                <h3>Job Search Support</h3>
+                <p>Discover job opportunities that match your profile.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">⭐</div>
+                <h3>Profile Improvement</h3>
+                <p>Build a strong and professional profile.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAGE 5: ABOUT US -->
+    <section class="section" id="about">
+
+        <h2>About Our Job Portal</h2>
+
+        <p class="subtitle">
+            Connecting talented people with career opportunities
+        </p>
+
+        <div class="about-section">
+
+            <div class="about-content">
+
+                <h3>Who We Are</h3>
+
+                <p>
+                    Our job search website is designed to help job seekers
+                    discover career opportunities across different
+                    industries. We aim to make the job search process
+                    simple and convenient.
+                </p>
+
+                <h3>Our Mission</h3>
+
+                <p>
+                    Our mission is to connect job seekers with suitable
+                    opportunities and help them achieve their professional
+                    goals.
+                </p>
+
+                <h3>Why Choose Us?</h3>
+
+                <ul>
+                    <li>Easy job searching experience</li>
+                    <li>Opportunities across different industries</li>
+                    <li>Information about leading companies</li>
+                    <li>Career development resources</li>
+                    <li>Simple and user-friendly interface</li>
+                </ul>
+
+            </div>
+
+
+            <div class="contact-box">
+
+                <h3>Contact Us</h3>
+
+                <p>Have questions? Get in touch with us.</p>
+
+                <p>📧 Email: support@example.com</p>
+
+                <p>🌐 Website: www.example.com</p>
+
+                <p>📍 Location: India</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+                <h3>naukri.com</h3>
+                <p>Find the right job for your career.</p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#jobs">Jobs</a>
+                <a href="#companies">Companies</a>
+            </div>
+
+            <div>
+                <h3>Support</h3>
+                <a href="#services">Career Services</a>
+                <a href="#about">About Us</a>
+                <a href="#about">Contact Us</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 Naukri Job Search Website. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

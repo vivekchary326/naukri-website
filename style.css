@@ -1,0 +1,264 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:white;
+    padding: 18px 7%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    color: #275df5;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #275df5;
+}
+
+/* Buttons */
+.btn {
+    background-color: #275df5;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #1745c4;
+}
+
+/* Home Section */
+.hero {
+    text-align: center;
+    padding: 90px 20px;
+    background-color: #eaf0ff;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-box input,
+.search-box select {
+    padding: 14px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Common Section */
+.section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 35px;
+}
+
+/* Grid Layout */
+.category-container,
+.jobs-container,
+.company-container,
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+/* Cards */
+.category-card,
+.job-card,
+.company-card,
+.service-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    transition: 0.3s;
+}
+
+.category-card:hover,
+.job-card:hover,
+.company-card:hover,
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+.category-card h3,
+.job-card h3,
+.company-card h3,
+.service-card h3 {
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.category-card p,
+.job-card p,
+.company-card p,
+.service-card p {
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+/* Job Details */
+.job-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.job-details span {
+    color: #666;
+    font-size: 14px;
+}
+
+/* About Section */
+.about-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.about-content p {
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.about-content ul {
+    padding-left: 20px;
+    line-height: 2;
+}
+
+.contact-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* Footer */
+.footer {
+    background-color: #17233f;
+    color: white;
+    padding: 35px 7%;
+    text-align: center;
+}
+
+.footer p {
+    margin: 8px 0;
+    color: #ddd;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .category-container,
+    .jobs-container,
+    .company-container,
+    .services-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .category-container,
+    .jobs-container,
+    .company-container,
+    .services-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box input,
+    .search-box select {
+        width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .section {
+        padding: 45px 5%;
+    }
+}
